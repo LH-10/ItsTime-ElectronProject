@@ -1,0 +1,20 @@
+.timer-card{
+    display: flex;
+    flex-direction: column;
+}
+
+.timer-card .head-opt{
+    display: flex;
+}
+
+
+.time-class{
+    margin: 5px 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.time-class .time-remaining{
+    border-radius: 60%;
+}
