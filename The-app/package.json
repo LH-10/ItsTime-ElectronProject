@@ -1,11 +1,11 @@
 {
   "name": "cpy",
-  "productName": "cpy",
+  "productName": "Times_Up",
   "version": "1.0.0",
   "description": "My Electron application description",
   "main": ".webpack/main",
   "scripts": {
-    "dev:start":"npm start ./src/React/App.tsx",
+    "dev:start": "electron-forge start",
     "start": "electron-forge start",
     "package": "electron-forge package",
     "make": "electron-forge make",
@@ -28,6 +28,7 @@
     "@electron-forge/plugin-fuses": "^7.8.1",
     "@electron-forge/plugin-webpack": "^7.8.1",
     "@electron/fuses": "^1.8.0",
+    "@types/os-utils": "^0.0.4",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
     "@typescript-eslint/eslint-plugin": "^5.62.0",
@@ -46,7 +47,9 @@
   },
   "dependencies": {
     "electron-squirrel-startup": "^1.0.1",
+    "os-utils": "^0.0.14",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react-dom": "^19.1.0",
+    "react-router-dom": "^7.7.0"
   }
 }
