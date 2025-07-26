@@ -3,10 +3,11 @@ import { getStaticData } from "./resourceManager";
 
 contextBridge.exposeInMainWorld('electron',{
     subscribeStatistics:(callback:(statistics:any)=>void)=>{
-        ipcRenderer.on("statistics",(_,statistics)=>{
-            
+        const fn=(_:Electron.IpcRendererEvent,statistics:any)=>{
             callback(statistics)
-        })
+        }
+        ipcRenderer.on("statistics",fn);
+        return ()=>ipcRenderer.off("statistics",fn);
         },
     getStaticData: ()=> console.log('static')
 })
