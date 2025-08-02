@@ -13,7 +13,7 @@ export function pollResource(mainWindow?: BrowserWindow ){
         mainWindow.webContents.send("statistics",{
           cpuUsage,memoryUsage,storageData  
         } )
-        console.log(cpuUsage,memoryUsage,storageData)
+        // console.log(cpuUsage,memoryUsage,storageData)
     },Interval)
 }
 
