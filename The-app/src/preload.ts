@@ -9,6 +9,8 @@ contextBridge.exposeInMainWorld('electron',{
         ipcRenderer.on("statistics",fn);
         return ()=>ipcRenderer.off("statistics",fn);
         },
+        sendNotification:(message:string)=>ipcRenderer.send("alarm-notification",message)
+        ,
     getStaticData: ()=> console.log('static')
 })
 

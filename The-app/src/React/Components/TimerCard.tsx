@@ -4,8 +4,8 @@ import { Trash2, RotateCcw, Play, Pause } from 'lucide-react';
 
 const TimerCard = () => {
   const navigate = useNavigate()
-  const orignaltime = 120
-  const [timeLeft, setTimeLeft] = useState(120); // 25 minutes
+  const orignaltime = 10
+  const [timeLeft, setTimeLeft] = useState(10); // 25 minutes
   const [percentage, setPercentage] = useState<number>(0)
   const [fill, setFill] = useState<number>()
   const [countDown, setCountDown] = useState()
@@ -27,7 +27,7 @@ const TimerCard = () => {
 
   const timerHandler=()=>{
    if (start == true) {
-      setPercentage(100)
+      // setPercentage(100)
     }
     else {
       if (intervalref.current)
@@ -98,6 +98,7 @@ const TimerCard = () => {
     if(timeLeft<=0){
       clearInterval(intervalref.current);
       console.log("its time")
+      window.electron.sendNotification("it Time")
       setTimeout(resetOrignalTime,1000)
     }
   },[timeLeft])
