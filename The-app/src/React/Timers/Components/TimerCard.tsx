@@ -2,10 +2,16 @@ import { useNavigate } from "react-router-dom"
 import { useEffect, useRef, useState } from "react"
 import { Trash2, RotateCcw, Play, Pause } from 'lucide-react';
 
-const TimerCard = () => {
+type TimerCardProps ={
+  time:number,
+  message?:string,
+  other?:any,
+}
+
+const TimerCard = ({time,message='Its Time',other}:TimerCardProps) => {
   const navigate = useNavigate()
-  const orignaltime = 10
-  const [timeLeft, setTimeLeft] = useState(10); // 25 minutes
+  const orignaltime = time
+  const [timeLeft, setTimeLeft] = useState(time); // 25 minutes
   const [percentage, setPercentage] = useState<number>(0)
   const [fill, setFill] = useState<number>()
   const [countDown, setCountDown] = useState()
@@ -98,14 +104,14 @@ const TimerCard = () => {
     if(timeLeft<=0){
       clearInterval(intervalref.current);
       console.log("its time")
-      window.electron.sendNotification("it Time")
+      window.electron.sendNotification(message)
       setTimeout(resetOrignalTime,1000)
     }
   },[timeLeft])
 
 
   return (
-    <div className="bg-white shadow-lg rounded-xl p-6 w-64 text-center relative">
+    <div className=" group/parent1  bg-white shadow-lg rounded-xl p-6 w-64 text-center relative">
       {/*  Icons */}
       <div className="flex justify-between mb-6">
         <button title="Delete" className="p-2 rounded bg-gray-50 hover:bg-gray-300">
@@ -118,7 +124,11 @@ const TimerCard = () => {
         </button>
       </div>
 
-      {/* Circle */}
+
+      
+      <div className="p-2 m-3 duration-500 origin-bottom-right justify-center hidden group-hover/parent1:flex ">
+        <h2 className="font-semibold text-xl"> Title here </h2>
+      </div>
       {/* Circle */}
       <div className="flex items-center justify-center mb-6">
         <div className="relative w-44 h-44 rounded-full bg-gray-200 flex items-center shadow-md justify-center">
@@ -153,14 +163,17 @@ const TimerCard = () => {
         </div>
       </div>
 
+      <div className="p-1 m-2 hidden justify-center group-hover/parent1:flex">
+        <h2 className="font-semibold text-sm"> Message here  </h2>
+      </div>
 
       {/* Start Btn */}
       {start ? (
         <button onClick={startPauseHandler} className=" bg-gray-600  hover:bg-gray-700  text-white rounded-md font-medium px-2 py-2  flex items-center justify-center gap-2 w-full">
           <Pause className="w-4 h-4  fill-white " />
           <p className="pb-1">Pause</p>
-        </button>) : (<button onClick={startPauseHandler} className="group bg-blue-600  hover:bg-blue-700  text-white rounded-md font-medium px-2 py-2  flex items-center justify-center gap-2 w-full">
-          <Play className="w-4 h-4  group-hover:fill-white " />
+        </button>) : (<button onClick={startPauseHandler} className="group/parent2 bg-blue-600  hover:bg-blue-700  text-white rounded-md font-medium px-2 py-2  flex items-center justify-center gap-2 w-full">
+          <Play className="w-4 h-4  group-hover/parent2:fill-white " />
           <p className="pb-1">Start</p>
         </button>)}
     </div>
