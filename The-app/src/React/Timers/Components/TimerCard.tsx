@@ -5,10 +5,11 @@ import { Trash2, RotateCcw, Play, Pause } from 'lucide-react';
 type TimerCardProps ={
   time:number,
   message?:string,
+  title?:string,
   other?:any,
 }
 
-const TimerCard = ({time,message='Its Time',other}:TimerCardProps) => {
+const TimerCard = ({time,message='Its Time',title,other}:TimerCardProps) => {
   const navigate = useNavigate()
   const orignaltime = time
   const [timeLeft, setTimeLeft] = useState(time); // 25 minutes
@@ -113,7 +114,7 @@ const TimerCard = ({time,message='Its Time',other}:TimerCardProps) => {
   return (
     <div className=" group/parent1  bg-white shadow-lg rounded-xl p-6 w-64 text-center relative">
       {/*  Icons */}
-      <div className="flex justify-between mb-6">
+      <div className="flex justify-between mb-4">
         <button title="Delete" className="p-2 rounded bg-gray-50 hover:bg-gray-300">
           <Trash2 className="w-5 h-5 text-gray-600" />
           {/* Del Icon */}
@@ -126,8 +127,8 @@ const TimerCard = ({time,message='Its Time',other}:TimerCardProps) => {
 
 
       
-      <div className="p-2 m-3 duration-500 origin-bottom-right justify-center hidden group-hover/parent1:flex ">
-        <h2 className="font-semibold text-xl"> Title here </h2>
+      <div className="p-2 m-2 duration-500 origin-bottom-right justify-center flex   ">
+        <h2 title={title} className="font-semibold opacity-0 truncate text-xl group-hover/parent1:opacity-100" >{title}</h2>
       </div>
       {/* Circle */}
       <div className="flex items-center justify-center mb-6">
@@ -163,8 +164,8 @@ const TimerCard = ({time,message='Its Time',other}:TimerCardProps) => {
         </div>
       </div>
 
-      <div className="p-1 m-2 hidden justify-center group-hover/parent1:flex">
-        <h2 className="font-semibold text-sm"> Message here  </h2>
+      <div className="p-1 m-2 flex justify-center ">
+        <h2 title={message} className="font-semibold opacity-0 text-sm group-hover/parent1:opacity-100 truncate">{message}  </h2>
       </div>
 
       {/* Start Btn */}
