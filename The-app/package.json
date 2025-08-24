@@ -28,6 +28,7 @@
     "@electron-forge/plugin-fuses": "^7.8.1",
     "@electron-forge/plugin-webpack": "^7.8.1",
     "@electron/fuses": "^1.8.0",
+    "@types/better-sqlite3": "^7.6.13",
     "@types/os-utils": "^0.0.4",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",

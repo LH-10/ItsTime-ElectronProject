@@ -1,6 +1,8 @@
 import { app, BrowserWindow ,Notification} from 'electron';
 import path from 'path';
 import { pollResource } from './resourceManager';
+import { db, initDb } from './database/sqldb';
+import { timeDataIPC } from './ipc/timers/timersDataIpc';
 const Database = require('better-sqlite3');
 
 app.setAppUserModelId('My new app');
@@ -35,9 +37,10 @@ const createWindow = (): void => {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
     height: 600,
-    minHeight:450,
-    minWidth:600,
+    minHeight:500,
+    minWidth:680,
     width: 800,
+    icon:"./app-assetss/appicon",
     webPreferences: {
        devTools:isDev,
       preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY,
@@ -48,6 +51,7 @@ const createWindow = (): void => {
   mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
   console.log("Hello")
   console.log("helq")
+  initDb();
   pollResource(mainWindow)
   // const dbPath = path.join(app.getPath('userData'), 'test.db');
   // const db = new Database(dbPath);
@@ -56,13 +60,17 @@ const createWindow = (): void => {
 
   // const row = db.prepare('SELECT * FROM test ORDER BY id DESC LIMIT 1').get();
   // console.log('🧪 better-sqlite3 working:', row);
-  //  db.exec(`
-  //   CREATE TABLE IF NOT EXISTS notes (
-  //     id INTEGER PRIMARY KEY,
-  //     content TEXT
-  //   )
-  // `);
-  notificationIPC()
+   db.exec(`
+    CREATE TABLE IF NOT EXISTS timers (
+      id INTEGER PRIMARY KEY,
+      seconds TEXT
+    )
+  `);
+  // const insert=db.prepare('INSERT INTO timers (id,seconds) VALUES(?,?)')
+  // const result=insert.run(1,'40')
+  // console.log('Result is:', result)
+  notificationIPC();
+  timeDataIPC();
   //   const notification = new Notification({
   //   title: 'Custom Notification',
   //   body: 'Click Dismiss to close this notification.',

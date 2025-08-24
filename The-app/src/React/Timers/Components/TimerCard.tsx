@@ -98,21 +98,24 @@ const TimerCard = ({time,message='Its Time',title,other}:TimerCardProps) => {
     
   }, [percentage])
 
-
-  useEffect(timerHandler, [start])
-  useEffect(()=>{
-    handleProgressBar()
+  function checkTime(){
     if(timeLeft<=0){
       clearInterval(intervalref.current);
       console.log("its time")
       window.electron.sendNotification(message)
       setTimeout(resetOrignalTime,1000)
     }
+  }
+
+  useEffect(timerHandler, [start])
+  useEffect(()=>{
+    handleProgressBar()
+    checkTime()
   },[timeLeft])
 
 
   return (
-    <div className=" group/parent1  bg-white shadow-lg rounded-xl p-6 w-64 text-center relative">
+    <div className=" group/parent1  bg-white shadow-lg rounded-xl px-6 py-3 w-64 text-center relative">
       {/*  Icons */}
       <div className="flex justify-between mb-4">
         <button title="Delete" className="p-2 rounded bg-gray-50 hover:bg-gray-300">
@@ -170,10 +173,10 @@ const TimerCard = ({time,message='Its Time',title,other}:TimerCardProps) => {
 
       {/* Start Btn */}
       {start ? (
-        <button onClick={startPauseHandler} className=" bg-gray-600  hover:bg-gray-700  text-white rounded-md font-medium px-2 py-2  flex items-center justify-center gap-2 w-full">
+        <button onClick={startPauseHandler} className=" bg-gray-600  hover:bg-gray-700  text-white rounded-md font-medium px-2 py-1.5 mb-1 flex items-center justify-center gap-2 w-full">
           <Pause className="w-4 h-4  fill-white " />
           <p className="pb-1">Pause</p>
-        </button>) : (<button onClick={startPauseHandler} className="group/parent2 bg-blue-600  hover:bg-blue-700  text-white rounded-md font-medium px-2 py-2  flex items-center justify-center gap-2 w-full">
+        </button>) : (<button onClick={startPauseHandler} className="group/parent2 bg-blue-600  hover:bg-blue-700  text-white rounded-md font-medium px-2 py-1.5 mb-1 flex items-center justify-center gap-2 w-full">
           <Play className="w-4 h-4  group-hover/parent2:fill-white " />
           <p className="pb-1">Start</p>
         </button>)}

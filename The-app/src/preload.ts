@@ -11,7 +11,9 @@ contextBridge.exposeInMainWorld('electron',{
         },
         sendNotification:(message:string)=>ipcRenderer.send("alarm-notification",message)
         ,
-    getStaticData: ()=> console.log('static')
+        getTimerData:()=>ipcRenderer.invoke("get-timersData")
+        ,
+        getStaticData: ()=> console.log('static')
 })
 
 // See the Electron documentation for details on how to use preload scripts:

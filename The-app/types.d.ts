@@ -12,6 +12,7 @@ interface StaticData{
 
 interface Window{
     electron:{
+        getTimerData:()=>Promise<any>
         sendNotification:(message:string)=>void,
         subscribeStatistics:(callback:(statistics:Statistics)=>void)=>void
     }
