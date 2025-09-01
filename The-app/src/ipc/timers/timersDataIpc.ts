@@ -2,8 +2,9 @@ import { ipcMain } from "electron";
 import { db } from "../../database/sqldb";
 
 async function getTimerData(){
-    const row = db.prepare('Select * from timers where id = ?')
-    const timer=await row.get(1)
+    const row = db.prepare('Select * from timers ')
+    const timer=await row.all()
+    console.log(timer)
     return timer
 }
 
