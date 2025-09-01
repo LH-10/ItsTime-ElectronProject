@@ -2,10 +2,10 @@ import { ipcMain, IpcMain, IpcMainEvent } from "electron";
 import { db } from "../../../src/database/sqldb";
 
  function AddNewTimer(title:string,message:string,time:{hours:number,minutes:number,seconds:number}){
-    const insert =db.prepare("INSERT INTO timers (id,seconds) values(?,?)")
+    const insert =db.prepare("INSERT INTO timers (title,message,seconds) values(?,?,?)")
     console.log(title,message,time)
     const seconds=time.hours*60*60+time.minutes*60+time.seconds
-    const info= insert.run((new Date().getTime()),seconds.toString())
+    const info= insert.run(title,message,seconds)
     
     if(info.changes==1){
         console.log("timer added")

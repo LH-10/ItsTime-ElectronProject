@@ -10,8 +10,8 @@ const TimerSection = () => {
     useEffect(() => {
         async function getTimerInfo() {
             const datas = await window.electron.getTimerData()
-            datas.map((data:any)=>{data["title"] = '1st Timer';
-            data["message"] = 'Some other task';
+            datas.map((data:any)=>{
+            data["message"] = data.message;
             data['time'] = parseInt(data["seconds"])
             console.log(data)
             setTimers((prev)=>[...prev,data])

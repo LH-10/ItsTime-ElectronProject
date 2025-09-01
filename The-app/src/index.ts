@@ -61,12 +61,20 @@ const createWindow = (): void => {
 
   // const row = db.prepare('SELECT * FROM test ORDER BY id DESC LIMIT 1').get();
   // console.log('🧪 better-sqlite3 working:', row);
-   db.exec(`
-    CREATE TABLE IF NOT EXISTS timers (
-      id INTEGER PRIMARY KEY,
-      seconds TEXT
-    )
-  `);
+  try{
+
+    db.exec(`
+      CREATE TABLE IF NOT EXISTS timers (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        title TEXT,
+        message TEXT,
+        seconds INTEGER
+        )
+        `);
+        }
+        catch(err){
+          console.log(err)
+        }
   // const insert=db.prepare('INSERT INTO timers (id,seconds) VALUES(?,?)')
   // const result=insert.run(1,'40')
   // console.log('Result is:', result)
