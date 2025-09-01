@@ -3,6 +3,7 @@ import path from 'path';
 import { pollResource } from './resourceManager';
 import { db, initDb } from './database/sqldb';
 import { timeDataIPC } from './ipc/timers/timersDataIpc';
+import { handleIpcRegistration } from './ipc/ipc_register';
 const Database = require('better-sqlite3');
 
 app.setAppUserModelId('My new app');
@@ -70,7 +71,7 @@ const createWindow = (): void => {
   // const result=insert.run(1,'40')
   // console.log('Result is:', result)
   notificationIPC();
-  timeDataIPC();
+  handleIpcRegistration();
   //   const notification = new Notification({
   //   title: 'Custom Notification',
   //   body: 'Click Dismiss to close this notification.',

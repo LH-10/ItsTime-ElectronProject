@@ -1,3 +1,5 @@
+
+
 interface Statistics{
     cpuUsage:number;
     ramUsage:number;
@@ -10,10 +12,18 @@ interface StaticData{
     totalMemory:number;
 }
 
+type AddNewTimer=(timerParams:{title:string,message:string,time:{hours:number,minutes:number,seconds:number}})=>void
+
 interface Window{
     electron:{
         getTimerData:()=>Promise<any>
         sendNotification:(message:string)=>void,
         subscribeStatistics:(callback:(statistics:Statistics)=>void)=>void
+        
+    }
+    timeApi:{
+        timer:{
+            addNewTimer:AddNewTimer
+        }
     }
 }
