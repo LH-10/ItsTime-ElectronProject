@@ -62,7 +62,6 @@ const createWindow = (): void => {
   // const row = db.prepare('SELECT * FROM test ORDER BY id DESC LIMIT 1').get();
   // console.log('🧪 better-sqlite3 working:', row);
   try{
-
     db.exec(`
       CREATE TABLE IF NOT EXISTS timers (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -71,10 +70,11 @@ const createWindow = (): void => {
         seconds INTEGER
         )
         `);
-        }
-        catch(err){
-          console.log(err)
-        }
+        db.exec('Delete from  timers');
+      }
+      catch(err){
+        console.log(err)
+      }
   // const insert=db.prepare('INSERT INTO timers (id,seconds) VALUES(?,?)')
   // const result=insert.run(1,'40')
   // console.log('Result is:', result)

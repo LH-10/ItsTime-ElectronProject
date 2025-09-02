@@ -2,29 +2,39 @@ import React, { useEffect, useRef, useState } from "react";
 import AddTimer from "./Components/AddTimer"
 import { Edit2Icon, LucideAArrowDown, LucideAlarmClockPlus, LucideAlarmPlus, LucideEdit, LucidePlus, LucideSeparatorVertical, PlusIcon, PlusSquareIcon } from "lucide-react";
 import TimerCard from "./Components/TimerCard";
-import { AddNewTimer, NewTimerParams } from "./timer.types";
+import { AddNewTimer, NewTimerParams } from "../../types/timer.types";
 
 const TimerSection = () => {
-    const [timers, setTimers] = useState([{ id: '3', title: '1st Timer', time: 20, message: "Do this task" }, { title: '2nd Timer', id: '2', time: 20, message: "do another task" }])
-    const [showAddTimer,setShowAddTimer]=useState(false)
+    const [timers, setTimers] = useState([])
+    const [showAddTimer, setShowAddTimer] = useState(false)
+    type TimerData={
+            seconds: number;
+            time: number;
+            message: string;
+            title: string;
+    }
     useEffect(() => {
         async function getTimerInfo() {
-            const datas = await window.electron.getTimerData()
-            datas.map((data:any)=>{
-            data["message"] = data.message;
-            data['time'] = parseInt(data["seconds"])
-            console.log(data)
-            setTimers((prev)=>[...prev,data])
-        })
+            const data = await window.electron.getTimerData()
+            data.map((timer: TimerData) => {
+                timer["message"] = timer.message;
+                timer['time'] = timer["seconds"]
+                console.log(timer)
+                setTimers((prev) => [...prev, timer])
+            })
         }
         getTimerInfo();
     }, [])
-    
-    function addNewTimer(timerParams:NewTimerParams):AddNewTimer{
+
+    async function addNewTimer(timerParams: NewTimerParams) {
         console.log(timerParams.title)
-        
-        window.timeApi.timer.addNewTimer(timerParams)
-        return 
+      
+        const newTimer:TimerData  = await window.timeApi.timer.addNewTimer(timerParams)
+        console.log("newTImer:", newTimer)
+        newTimer.time = newTimer.seconds
+        setTimers((prev) => [...prev, newTimer])
+
+        return
     }
 
     return (
@@ -32,10 +42,10 @@ const TimerSection = () => {
             <div className=" flex flex-col items-center justify-center gap-8 ">
 
                 <div className="bg-gray-100 flex z-10 absolute w-28 top-0 right-0 mx-8 my-2 justify-center items-center shadow-md">
-                    <div className="p-2 m-2 cursor-pointer hover:bg-gray-200 rounded transition duration-200" onClick={()=>{setShowAddTimer(true)}}>
+                    <div className="p-2 m-2 cursor-pointer hover:bg-gray-200 rounded transition duration-200" onClick={() => { setShowAddTimer(true) }}>
                         <LucideAlarmClockPlus />
                     </div>
-               
+
 
                     <div className="p-2 m-2 cursor-pointer hover:bg-gray-200 rounded transition duration-200">
                         <LucideEdit />
@@ -49,7 +59,7 @@ const TimerSection = () => {
                 </div>
 
             </div>
-            <AddTimer openstates={[showAddTimer,setShowAddTimer]} addNewTimer={addNewTimer} />
+            <AddTimer openstates={[showAddTimer, setShowAddTimer]} addNewTimer={addNewTimer} />
         </>
     )
 }

@@ -1,6 +1,6 @@
 import { Clock, X, ChevronUp, ChevronDown, Edit3, MessageSquareIcon } from "lucide-react";
 import React,{useState} from "react";
-import { AddNewTimer, Time } from "../timer.types";
+import { AddNewTimer, Time } from "../../../types/timer.types";
 
 
 type AddTimerProps={

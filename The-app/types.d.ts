@@ -12,7 +12,7 @@ interface StaticData{
     totalMemory:number;
 }
 
-type AddNewTimer=(timerParams:{title:string,message:string,time:{hours:number,minutes:number,seconds:number}})=>void
+type AddNewTimer=(timerParams:{title:string,message:string,time:{hours:number,minutes:number,seconds:number}})=>Promise<any>
 
 interface Window{
     electron:{
