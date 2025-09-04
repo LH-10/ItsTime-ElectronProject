@@ -13,7 +13,7 @@ interface StaticData{
 }
 
 type AddNewTimer=(timerParams:{title:string,message:string,time:{hours:number,minutes:number,seconds:number}})=>Promise<any>
-
+type EditTimer=(id:number,title:string,message:string,time:number)=>Promise<any>;
 interface Window{
     electron:{
         getTimerData:()=>Promise<any>
@@ -23,7 +23,9 @@ interface Window{
     }
     timeApi:{
         timer:{
-            addNewTimer:AddNewTimer
+            addNewTimer:AddNewTimer,
+            editTimer:EditTimer
+            deleteTimer:(id:number)=>Promise<any>
         }
     }
 }

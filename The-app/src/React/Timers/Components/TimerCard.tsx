@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom"
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useMemo, useRef, useState } from "react"
 import { Trash2, RotateCcw, Play, Pause } from 'lucide-react';
 
 type TimerCardProps ={
@@ -47,7 +47,6 @@ const TimerCard = ({time,message='Its Time',title,other}:TimerCardProps) => {
         return newTimeLeft
       }
       )
-      console.log(percentage)
     }, 1000)
     
     return () => {
@@ -70,22 +69,24 @@ const TimerCard = ({time,message='Its Time',title,other}:TimerCardProps) => {
     return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
   };
 
-  const resetOrignalTime = () => {
-    setStart(false)
-    setTimeLeft(orignaltime)
-  }
+const resetOrignalTime = () => {
+  setStart(false)
+  setTimeLeft(orignaltime)
+}
+
+useEffect(() => {
+  const unsub = window.electron.subscribeStatistics((stats) => {
+    // console.log(stats)
+  });
+  // setInterval(()=>{
+    //   setPercentage((prevPercentage)=> (prevPercentage+10)%100)
+    // },1000)
+    return unsub;
+  }, [])
   
-  useEffect(() => {
-    const unsub = window.electron.subscribeStatistics((stats) => {
-      // console.log(stats)
-    });
-    // setInterval(()=>{
-      //   setPercentage((prevPercentage)=> (prevPercentage+10)%100)
-      // },1000)
-      return unsub;
-    }, [])
-    
-    const percentageTofillLength = (percentage: number) => {
+  useEffect(()=>{setTimeLeft(orignaltime)},[orignaltime])
+
+  const percentageTofillLength = (percentage: number) => {
   
       const filledLength = (percentage) / 100 * circumference;
       return filledLength;
@@ -118,7 +119,7 @@ const TimerCard = ({time,message='Its Time',title,other}:TimerCardProps) => {
     <div className=" group/parent1  bg-white shadow-lg rounded-xl px-6 py-3 w-64 text-center relative">
       {/*  Icons */}
       <div className="flex justify-between mb-4">
-        <button title="Delete" className="p-2 rounded bg-gray-50 hover:bg-gray-300">
+        <button title="Delete" onClick={()=>other.deleteTimer(other.id)} className="p-2 rounded bg-gray-50 hover:bg-gray-300">
           <Trash2 className="w-5 h-5 text-gray-600" />
           {/* Del Icon */}
         </button>

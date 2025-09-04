@@ -9,11 +9,13 @@ async  function AddNewTimer(title:string,message:string,time:Time){
     const info= await insert.run(title,message,seconds)
     
     if(info.changes==1){
-        console.log("timer added")
-        return {title,message,seconds}
+        const newid=info.lastInsertRowid
+        console.log("timer added",)
+        return {id:newid,title,message,seconds}
     }
     else{
         console.log("error occured during insetion")
+        return new Error('error occured')
     }
 
 }
