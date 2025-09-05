@@ -25,8 +25,8 @@ A clean, minimal desktop **Timer & Stopwatch** app (inspired by Microsoft Clock)
 
 
 ```markdown
-![Main view](assets/screenshots/main-view.png)
-![Timer card](assets/screenshots/timer-card.png)
+![Timer Preview](screenshots/TimerScreenshot.png)
+![Stopwatch Preview](screenshots/StopwatchScreenshot.png
 ```
 
 
