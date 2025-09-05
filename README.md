@@ -23,11 +23,15 @@ A clean, minimal desktop **Timer & Stopwatch** app (inspired by Microsoft Clock)
 
 ## Screenshots
 
+<p align="center">
+  
+<img src="screenshots/TimerScreenshot.png" alt="Timer Preview" width="550" />
+<br/>
+<br/>
+<br/>
+<img src="screenshots/StopwatchScreenshot.png" alt="Stopwatch Preview" width="550" />
+</p>
 
-```markdown
-![Timer Preview](screenshots/TimerScreenshot.png)
-![Stopwatch Preview](screenshots/StopwatchScreenshot.png
-```
 
 
 ---
