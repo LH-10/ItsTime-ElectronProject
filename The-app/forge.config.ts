@@ -17,6 +17,7 @@ const config: ForgeConfig = {
     icon: './src/app-assets/appicon',
     extraResource: [
           "./src/alarms/",
+          "./src/app-assets/",
     ]
   },
   rebuildConfig: {},

@@ -12,7 +12,7 @@ import Stopwatch from "./Stopwatch/Stopwatch";
 
 const AppRoute = () => {
   const navigate = useNavigate();
-  const [activeItem, setActiveItem] = useState("stopwatch");
+  const [activeItem, setActiveItem] = useState("timer");
 
   const [navItems, setNavItems] = useState([
     { icon: HourglassIcon, label: "Timer", id: "timer" },

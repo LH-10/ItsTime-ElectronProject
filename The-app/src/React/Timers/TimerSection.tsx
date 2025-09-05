@@ -63,7 +63,7 @@ const TimerSection = () => {
 
     return (
         <>
-            <div className=" flex flex-col items-center justify-center gap-8 ">
+            <div className=" flex py-3 flex-col items-center justify-center gap-8 ">
 
                 <div className="bg-gray-100 flex z-10 absolute w-28 top-0 right-0 mx-8 my-2 justify-center items-center shadow-md">
                     <div className="p-2 m-2 cursor-pointer hover:bg-gray-200 rounded transition duration-200" onClick={() => { setShowAddTimer(true) }}>
