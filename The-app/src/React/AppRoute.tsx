@@ -1,9 +1,9 @@
-import React from "react-dom/client";
+import React from "react";
 import TimerCard from "./Timers/Components/TimerCard";
 import { Link, Route, Routes, useNavigate } from "react-router-dom";
 import { ForwardRefExoticComponent, useEffect } from "react";
 import TimerSection from "./Timers/TimerSection";
-import { BarChart3, Bell, Calendar, Clock, Clock2Icon, Home, HourglassIcon, Settings, Timer } from "lucide-react";
+import { AlarmClockIcon, AlertCircle, BarChart3, Bell, Calendar, Clock, Clock2Icon, Home, HourglassIcon, Settings, Timer } from "lucide-react";
 import {  Watch } from "lucide-react";
 import { useState } from "react";
 import {  RefAttributes, SVGProps } from "react";
@@ -12,12 +12,13 @@ import Stopwatch from "./Stopwatch/Stopwatch";
 
 const AppRoute = () => {
   const navigate = useNavigate();
-  const [activeItem, setActiveItem] = useState("timer");
+  const [activeItem, setActiveItem] = useState("stopwatch");
 
   const [navItems, setNavItems] = useState([
     { icon: HourglassIcon, label: "Timer", id: "timer" },
     { icon: Clock2Icon, label: "Stopwatch", id: "stopwatch" },
     { icon: Settings, label: "Settings", id: "settings" },
+    { icon: AlarmClockIcon, label: "Alarm", id: "alarm" },
   ]);
 
   return (
@@ -45,21 +46,101 @@ const AppRoute = () => {
           </div>
         </nav>
       </div>
-      {/* Timer Section */}
-      <div className=" flex-1 pt-3 overflow-y-auto  content-center">
+      <div className=" flex-1 pt-2 overflow-y-auto  content-center">
         <div className="w-auto h-auto" hidden={activeItem!="timer"}> {/*logic to make it visible only when active item is timer*/ }
+      {/* Timer Section */}
 
         <TimerSection  />
         </div>
-        <div className="w-auto h-auto  " hidden={activeItem!="stopwatch"}> {/*logic to make it visible only when active item is timer*/ }
-
+        <div className="w-auto h-auto  " hidden={activeItem!="stopwatch"}>
+          {/*Stopwatch Section */}
         <Stopwatch/>
+        </div>
+        <div className="w-auto h-auto  " hidden={activeItem!="settings"}> 
+          {/*Settings Section */}
+          <InDev sectionName={"Settings"} 
+                 aim="This Section will Aim to Provide some personal Customization for the user"
+                 alert={"I am currently thinking what all options should i add in this section so it might take a while"}
+                 Icon={Settings}/>
+
+        </div>
+        <div className="w-auto h-auto  " hidden={activeItem!="alarm"}> 
+          {/*Alarm Section */}
+          <InDev sectionName={"Alarm"} 
+                 aim="This Section will contain daily alarm"
+                 alert={"Since i am not using window native language like c# implementing the alarm feature might be hard with framework like electron still I'll try"}
+                 Icon={AlarmClockIcon}/>
+
         </div>
       </div>
         
     </div>
   );
 };
+
+// function isDev({Icon:any,sectionName:string,aim:string,alert:string})=>{
+//   return (<div className="bg-white/95  m-auto backdrop-blur-sm rounded-2xl shadow-2xl p-12 max-w-md w-full text-center border border-gray-100">
+//               <div className="relative w-24 h-24 mx-auto mb-6">
+//                   <Settings
+//                     className="absolute top-0 left-4 w-16 h-16 text-red-600 "
+                    
+//                   />
+                  
+//                 </div>
+
+//                 <div className="inline-block bg-gradient-to-r from-red-500 to-red-600 text-white px-5 py-2 rounded-full text-xs font-semibold uppercase tracking-wider mb-4 animate-pulse">
+//                   In Development
+//                 </div>
+
+       
+//               <h1 className="text-2xl font-bold text-gray-900 mb-3 leading-tight">Settings Coming Soon</h1>
+//               <p className="text-gray-600 text-base mb-6 leading-relaxed">
+//                 This Section will Aim to Provide some personal Customization for the user
+//               </p>
+
+//               <div className="bg-gray-200 h-2 rounded-full overflow-hidden mb-6">
+//                 <div
+//                   className="h-full bg-gradient-to-r from-red-500 to-red-600 rounded-full animate-pulse"
+//                   style={{ width: "5%" }}
+//                 />
+//               </div>
+
+//          <div className="bg-red-50 border border-red-200 rounded-xl p-4 flex items-center gap-3">
+//           <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0" />
+//           <span className="text-red-800 text-sm leading-relaxed">
+//             I am currently thinking what all options should i add in this section so it might take a while
+//           </span>
+//         </div>
+//       </div>)
+//   }
+
+const InDev = React.memo(({ Icon, sectionName, aim, alert }: { Icon: any, sectionName: string, aim: string, alert: string }) => {
+  return (
+    <div className="bg-white/95 m-auto backdrop-blur-sm rounded-2xl shadow-2xl p-12 max-w-md w-full text-center border border-gray-100">
+      <div className="relative w-24 h-24 mx-auto mb-6">
+        <Icon className="absolute top-0 left-4 w-16 h-16 text-red-600" />
+      </div>
+
+      <div className="inline-block bg-gradient-to-r from-red-500 to-red-600 text-white px-5 py-2 rounded-full text-xs font-semibold uppercase tracking-wider mb-4 animate-pulse">
+        In Development
+      </div>
+
+      <h1 className="text-2xl font-bold text-gray-900 mb-3 leading-tight">{sectionName} Coming Soon</h1>
+      <p className="text-gray-600 text-base mb-6 leading-relaxed">{aim}</p>
+
+      <div className="bg-gray-200 h-2 rounded-full overflow-hidden mb-6">
+        <div className="h-full bg-gradient-to-r from-red-500 to-red-600 rounded-full animate-pulse" style={{ width: "5%" }} />
+      </div>
+
+      <div className="bg-red-50 border border-red-200 rounded-xl p-4 flex items-center gap-3">
+        <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0" />
+        <span className="text-red-800 text-sm leading-relaxed">
+          {alert}
+        </span>
+      </div>
+    </div>
+  );
+});
 
 interface SidebarItemProps {
   icon: ForwardRefExoticComponent<SVGProps<SVGSVGElement> & RefAttributes<SVGSVGElement>>;
@@ -77,7 +158,7 @@ function SidebarItem({ icon: Icon, label, active = false, onClick }: SidebarItem
           ? "bg-gray-300 text-black"
           : "text-gray-700 hover:bg-gray-200 hover:text-black"
       } sm:justify-start justify-center`}
-      title={label} // Tooltip for collapsed state
+      title={label} 
     >
       <Icon className="w-[1.1rem] h-[1.1rem] flex-shrink-0" />
       <span className="text-sm font-medium hidden md:block">{label}</span>
