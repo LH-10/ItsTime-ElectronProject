@@ -15,6 +15,9 @@ const config: ForgeConfig = {
   packagerConfig: {
     asar: true,
     icon: './src/app-assets/appicon',
+    extraResource: [
+          "./src/alarms/",
+    ]
   },
   rebuildConfig: {},
   makers: [new MakerSquirrel({}), new MakerZIP({}, ['darwin']), new MakerRpm({}), new MakerDeb({})],

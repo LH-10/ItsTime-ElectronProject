@@ -5,7 +5,7 @@ declare module "*.svg" {
   export default content;
 }
 
-
+declare module "node-wav-player"
 interface Statistics{
     cpuUsage:number;
     ramUsage:number;

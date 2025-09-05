@@ -2,6 +2,16 @@ import type { ModuleOptions } from 'webpack';
 
 export const rules: Required<ModuleOptions>['rules'] = [
   // Add support for native node modules
+   {
+        test: /\.(wav|mp3|ogg)$/, // Add audio file extensions here
+       use: {
+          loader: 'file-loader',
+          options: {
+            name: '[name].[ext]', // Preserve file name and extension
+            outputPath: 'resources/alarms/', // Place audio files in the assets/audio folder
+          },
+        },
+      },
   {
     // We're specifying native_modules in the test because the asset relocator loader generates a
     // "fake" .node file which is really a cjs file.
