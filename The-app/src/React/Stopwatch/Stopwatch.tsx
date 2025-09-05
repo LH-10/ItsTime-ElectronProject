@@ -6,7 +6,6 @@ const Stopwatch = () => {
   const [isRunning, setIsRunning] = useState(false);
   const [laps, setLaps] = useState<number[]>([]);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
-
   useEffect(() => {
     if (isRunning) {
       intervalRef.current = setInterval(() => {
@@ -59,7 +58,7 @@ const Stopwatch = () => {
   const { hours, minutes, seconds, milliseconds } = formatTime(time);
 
   return (
-    <div className="w-full  max-w-md mx-auto bg-white dark:bg-gray-900 rounded-2xl dark:border-gray-700">
+    <div className="w-full  max-w-md mx-auto bg-white dark:bg-gray-900 rounded-2xl  dark:border-gray-700">
       <div className="p-8 text-center space-y-8">
         {/* Time Display */}
         <div className="space-y-2">
@@ -73,12 +72,12 @@ const Stopwatch = () => {
         </div>
 
         {/* Control Buttons */}
-        <div className="flex justify-center gap-4">
+        <div className="flex justify-center gap-4  ">
           <button
             onClick={handleStartStop}
-            className={`w-16 h-16 rounded-full flex items-center justify-center transition-all duration-200 ${
+            className={`w-14 h-14 rounded-full flex items-center justify-center transition-all duration-200 ${
               isRunning
-                ? "bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700"
+                ? "bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-300  dark:hover:bg-gray-700"
                 : "bg-blue-500 text-white hover:bg-blue-600 shadow-lg hover:shadow-xl"
             }`}
           >
@@ -88,7 +87,7 @@ const Stopwatch = () => {
           <button
             onClick={handleLap}
             disabled={!isRunning}
-            className="w-16 h-16 rounded-full flex items-center justify-center border-2 border-blue-500 text-blue-500 hover:bg-blue-50 dark:hover:bg-blue-950 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-transparent"
+            className="w-14 h-14 rounded-full flex items-center justify-center border-2 border-blue-500 text-blue-500 hover:bg-blue-50 dark:hover:bg-blue-950 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-transparent"
           >
             <FlagTriangleRightIcon className="w-6 h-6" />
           </button>
@@ -96,7 +95,7 @@ const Stopwatch = () => {
           <button
             onClick={handleReset}
             disabled={time === 0}
-            className="w-16 h-16 rounded-full flex items-center justify-center border-2 border-gray-300 dark:border-gray-600 text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-transparent"
+            className="w-14 h-14 rounded-full flex items-center justify-center border-2 border-gray-300 dark:border-gray-600 text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-transparent"
           >
             <RotateCcw className="w-6 h-6" />
           </button>
@@ -124,6 +123,7 @@ const Stopwatch = () => {
             </div>
           </div>
         )}
+      
       </div>
     </div>
   );

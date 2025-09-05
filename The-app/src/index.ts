@@ -70,7 +70,6 @@ const createWindow = (): void => {
         seconds INTEGER
         )
         `);
-        db.exec('Delete from  timers');
       }
       catch(err){
         console.log(err)
