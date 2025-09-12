@@ -9,7 +9,6 @@ const Database = require('better-sqlite3');
 app.setAppUserModelId('Its Time');
 
 
-const notificationIPC =require("./ipc/notification/notificationIpc")
 
 // type SubMenu={
 //     label:string,

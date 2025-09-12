@@ -28,4 +28,4 @@ async function handleNotification(event:IpcMainEvent,message:string){
     ipcMain.on('alarm-notification',handleNotification)
 }
 
-module.exports= notificationIPC;
+export {notificationIPC};
