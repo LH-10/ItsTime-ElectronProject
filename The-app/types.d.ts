@@ -22,10 +22,9 @@ type AddNewTimer=(timerParams:{title:string,message:string,time:{hours:number,mi
 type EditTimer=(id:number,title:string,message:string,time:number)=>Promise<any>;
 interface Window{
     electron:{
-        getTimerData:()=>Promise<any>
+        getTimerData:()=>Promise<any>,
         sendNotification:(message:string)=>void,
-        subscribeStatistics:(callback:(statistics:Statistics)=>void)=>void
-        
+
     }
     timeApi:{
         timer:{

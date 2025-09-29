@@ -75,13 +75,10 @@ const resetOrignalTime = () => {
 }
 
 useEffect(() => {
-  const unsub = window.electron.subscribeStatistics((stats) => {
-    // console.log(stats)
-  });
+ 
   // setInterval(()=>{
     //   setPercentage((prevPercentage)=> (prevPercentage+10)%100)
     // },1000)
-    return unsub;
   }, [])
   
   useEffect(()=>{setTimeLeft(orignaltime)},[orignaltime])

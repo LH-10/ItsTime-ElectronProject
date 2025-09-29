@@ -86,7 +86,7 @@ const createWindow = (): void => {
   mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
   console.log("Hello")
   initDb();
-  pollResource(mainWindow)
+  // pollResource(mainWindow)
  
   try{
     db.exec(`

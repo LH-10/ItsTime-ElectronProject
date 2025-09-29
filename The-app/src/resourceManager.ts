@@ -10,9 +10,9 @@ export function pollResource(mainWindow?: BrowserWindow ){
         const memoryUsage=getMemoryUsage();
         const storageData=getStorage() || "nan";
      
-        mainWindow.webContents.send("statistics",{
-          cpuUsage,memoryUsage,storageData  
-        } )
+        // mainWindow.webContents.send("statistics",{
+        //   cpuUsage,memoryUsage,storageData  
+        // } )
         // console.log(cpuUsage,memoryUsage,storageData)
     },Interval)
 }
