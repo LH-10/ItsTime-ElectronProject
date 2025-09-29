@@ -2,9 +2,10 @@ import { ipcMain, IpcMainEvent, Notification } from "electron";
 import say from 'say'
 import { playForInterval, stopAlarm } from "./ringAlarm";
 
+let notification
 async function handleNotification(event:IpcMainEvent,message:string){
     
-    const notification=new Notification({
+     notification=new Notification({
         title:"Its  Notification",
         body:message,
         actions:[{type:'button',text:"Dismiss"}],
@@ -16,11 +17,11 @@ async function handleNotification(event:IpcMainEvent,message:string){
 
    say.speak(message,'',1.1)
    playForInterval()
-   notification.show()
    notification.closeButtonText="dismiss"
    notification.on("click",()=>{stopAlarm()})
    notification.on("close",()=>{stopAlarm()})
    notification.addListener("action",()=>{stopAlarm()})
+   notification.show()
 
 }
 
