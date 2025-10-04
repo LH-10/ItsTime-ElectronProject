@@ -97,6 +97,13 @@ useEffect(() => {
   }, [percentage])
 
   function checkTime(){
+    if (!(orignaltime>0)){
+      if(start){
+        resetOrignalTime()
+        setStart(false)
+      }
+      return
+    }
     if(timeLeft<=0){
       clearInterval(intervalref.current);
       console.log("its time")

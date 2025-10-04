@@ -65,17 +65,17 @@ const TimerSection = () => {
         <>
             <div className=" flex py-3 flex-col items-center justify-center gap-8 ">
 
-                <div className="bg-gray-100 flex z-10 absolute w-28 top-0 right-0 mx-8 my-2 justify-center items-center shadow-md">
-                    <div className="p-2 m-2 cursor-pointer hover:bg-gray-200 rounded transition duration-200" onClick={() => { setShowAddTimer(true) }}>
+                <div className="bg-gray-100 flex  z-20 opacity-80 absolute w-28 top-0 right-0 mx-8 my-2 justify-center items-center shadow-md">
+                    <div className="p-2 m-2  cursor-pointer hover:bg-gray-200 rounded transition duration-200" onClick={() => { setShowAddTimer(true) }}>
                         <LucideAlarmClockPlus />
                     </div>
 
 
-                    <div className="p-2 m-2 cursor-pointer hover:bg-gray-200 rounded transition duration-200" onClick={()=>{setIsSelectable((pr)=>!pr)}}>
+                    <div className="p-2 m-2  cursor-pointer hover:bg-gray-200 rounded transition duration-200" onClick={()=>{setIsSelectable((pr)=>!pr)}}>
                         <LucideEdit />
                     </div>
                 </div>
-                <div className="my-2 grid grid-flow-row sm:grid-cols-2 xl:grid-cols-3 gap-x-9 gap-y-6">
+                <div className="my-5 grid grid-flow-row sm:grid-cols-2 xl:grid-cols-3 gap-x-9 gap-y-6">
 
                     {timers.map((timer) => (
                         <div className={`w-auto h-auto rounded-xl transition-all duration-300 ease-in-out 
