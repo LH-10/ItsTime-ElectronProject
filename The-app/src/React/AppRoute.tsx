@@ -68,7 +68,7 @@ const AppRoute = () => {
           {/*Alarm Section */}
           <InDev sectionName={"Alarm"} 
                  aim="This Section will contain daily alarm"
-                 alert={"Since i am not using window native language like c# implementing the alarm feature might be hard with framework like electron still I'll try"}
+                 alert={"I am still figuring out how should i go about programming alarm feature using electron"}
                  Icon={AlarmClockIcon}/>
 
         </div>

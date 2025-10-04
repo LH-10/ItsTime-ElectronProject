@@ -17,3 +17,21 @@ input[type="number"]::-webkit-outer-spin-button {
 input[type="number"] {
   appearance: textfield; 
 }
+
+::-webkit-scrollbar{
+    background:rgb(173, 171, 171);
+    width: 5px;
+  
+}
+
+::-webkit-scrollbar-thumb{
+  background: rgb(185, 184, 184);
+  border-radius: 40px;
+  width: 3px;
+}
+
+::-webkit-scrollbar-track{
+  background: white;
+  padding: 60px;
+  height: 20px;
+}
