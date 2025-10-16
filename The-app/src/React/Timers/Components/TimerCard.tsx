@@ -1,6 +1,9 @@
 import { useNavigate } from "react-router-dom"
 import { useEffect, useMemo, useRef, useState } from "react"
 import { Trash2, RotateCcw, Play, Pause } from 'lucide-react';
+//@ts-expect-error to allow the use of worker-loader 
+import NewWorker from "./timerWorker.worker"; 
+import React from "react";
 
 type TimerCardProps ={
   time:number,
@@ -9,6 +12,7 @@ type TimerCardProps ={
   other?:any,
 }
 
+let timeWorker:Worker
 const TimerCard = ({time,message='Its Time',title,other}:TimerCardProps) => {
   const navigate = useNavigate()
   const orignaltime = time
@@ -19,7 +23,7 @@ const TimerCard = ({time,message='Its Time',title,other}:TimerCardProps) => {
   const [start, setStart] = useState(false)
   
   const intervalref = useRef<any>(null)
-  
+  const timerWorkerRef=useRef<Worker>(null)
   const circumference = 2 * Math.PI * 45; //283
   
   // const [timeLeft,setTimeLeft]=useState({
@@ -35,20 +39,24 @@ const TimerCard = ({time,message='Its Time',title,other}:TimerCardProps) => {
   const timerHandler=()=>{
    if (start == true) {
       // setPercentage(100)
+      console.log("here")
+      if(!timerWorkerRef.current)
+      timerWorkerRef.current=new NewWorker()
     }
     else {
-      if (intervalref.current)
-        clearInterval(intervalref.current)
+      console.log("here, ",timeWorker)
+      if (timerWorkerRef.current){
+        timerWorkerRef.current.postMessage({command:"stop",value:timeLeft})
+      }
       return
     }
-    intervalref.current = setInterval(() => {
-      setTimeLeft((timeLeft) => {
-        const newTimeLeft = timeLeft - 1
-        return newTimeLeft
-      }
-      )
-    }, 1000)
-    
+    console.log("here2 tm ",timeWorker)
+    timerWorkerRef.current.onmessage=(e:MessageEvent)=>{
+      console.log(e)
+      setTimeLeft(parseInt(e.data))
+    }
+    timerWorkerRef.current.postMessage({command:"start",value:timeLeft})
+
     return () => {
       if (intervalref.current) {
         clearInterval(intervalref.current);
@@ -105,6 +113,10 @@ useEffect(() => {
       return
     }
     if(timeLeft<=0){
+      if(timerWorkerRef.current){
+        timerWorkerRef.current.terminate()
+        timerWorkerRef.current=null
+      }
       clearInterval(intervalref.current);
       console.log("its time")
       window.electron.sendNotification(message)

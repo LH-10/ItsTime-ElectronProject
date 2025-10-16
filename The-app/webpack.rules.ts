@@ -1,6 +1,12 @@
 import type { ModuleOptions } from 'webpack';
 
 export const rules: Required<ModuleOptions>['rules'] = [
+  {
+    test:/\.worker\.js?$/,
+    use:{
+      loader:'worker-loader',
+    }
+  },
   // Add support for native node modules
    {
         test: /\.(wav|mp3|ogg)$/, // Add audio file extensions here
