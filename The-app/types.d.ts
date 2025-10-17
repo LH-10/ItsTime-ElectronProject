@@ -23,7 +23,7 @@ type EditTimer=(id:number,title:string,message:string,time:number)=>Promise<any>
 interface Window{
     electron:{
         getTimerData:()=>Promise<any>,
-        sendNotification:(message:string)=>void,
+        sendNotification:(id:number|BigInt,message:string)=>void,
 
     }
     timeApi:{

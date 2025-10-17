@@ -119,7 +119,7 @@ useEffect(() => {
       }
       clearInterval(intervalref.current);
       console.log("its time")
-      window.electron.sendNotification(message)
+      window.electron.sendNotification(other.id,message)
       setTimeout(resetOrignalTime,1000)
     }
   }

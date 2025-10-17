@@ -2,10 +2,11 @@ import { ipcMain, IpcMainEvent, Notification } from "electron";
 import say from 'say'
 import { playForInterval } from "./ringAlarm";
 
-let notifications:Map<string,any>=new Map()//using map to keep notificaiton in scope else notification varibale will get garbage collected and events won't work
-async function handleNotification(event:IpcMainEvent,message:string){
+let notifications:Map<number|BigInt,any>=new Map()//using map to keep notificaiton in scope else notification varibale will get garbage collected and events won't work
+async function handleNotification(event:IpcMainEvent,id:number|BigInt,message:string){
     try {
-      
+      console.log(id)
+      console.log(message)
        const notification=new Notification({
           title:"Its  Notification",
           body:message,
@@ -15,24 +16,24 @@ async function handleNotification(event:IpcMainEvent,message:string){
           closeButtonText:"Dismiss",
           timeoutType:"never",
          })
-         notifications.set(message,notification)
-         say.speak(message,'',1.1)
+         notifications.set(id,notification)
+         await say.speak(message,'',1.1)
 
          const stopAlarm=playForInterval()
       
          notification.closeButtonText="dismiss";
          notification.on("click",()=>{
             stopAlarm() ; 
-            notifications.delete(message)
+            notifications.delete(id)
             //removing from map once the alarm has stopped
          })
          notification.on("close",()=>{
              stopAlarm();
-             notifications.delete(message)
+             notifications.delete(id)
             })
          notification.addListener("action",()=>{
             stopAlarm(); 
-            notifications.delete(message)
+            notifications.delete(id)
          })
          notification.show()
          

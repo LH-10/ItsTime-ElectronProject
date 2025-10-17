@@ -10,7 +10,7 @@ contextBridge.exposeInMainWorld('electron',{
     //     ipcRenderer.on("statistics",fn);
     //     return ()=>ipcRenderer.off("statistics",fn);
     // },
-    sendNotification:(message:string)=>ipcRenderer.send("alarm-notification",message)
+    sendNotification:(id:number|BigInt,message:string)=>ipcRenderer.send("alarm-notification",id,message)
     ,
     getTimerData:()=>ipcRenderer.invoke("get-timersData")
     ,
