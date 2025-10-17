@@ -1,28 +1,44 @@
 import { ipcMain, IpcMainEvent, Notification } from "electron";
 import say from 'say'
-import { playForInterval, stopAlarm } from "./ringAlarm";
+import { playForInterval } from "./ringAlarm";
 
-let notification
+let notifications:Map<string,any>=new Map()//using map to keep notificaiton in scope else notification varibale will get garbage collected and events won't work
 async function handleNotification(event:IpcMainEvent,message:string){
-    
-     notification=new Notification({
-        title:"Its  Notification",
-        body:message,
-        actions:[{type:'button',text:"Dismiss"}],
-        silent:false,
-        urgency:"critical",
-        closeButtonText:"Dismiss",
-        timeoutType:"never",
-    })
+    try {
+      
+       const notification=new Notification({
+          title:"Its  Notification",
+          body:message,
+          actions:[{type:'button',text:"Dismiss"}],
+          silent:false,
+          urgency:"critical",
+          closeButtonText:"Dismiss",
+          timeoutType:"never",
+         })
+         notifications.set(message,notification)
+         say.speak(message,'',1.1)
 
-   say.speak(message,'',1.1)
-   playForInterval()
-   notification.closeButtonText="dismiss"
-   notification.on("click",()=>{stopAlarm()})
-   notification.on("close",()=>{stopAlarm()})
-   notification.addListener("action",()=>{stopAlarm()})
-   notification.show()
-
+         const stopAlarm=playForInterval()
+      
+         notification.closeButtonText="dismiss";
+         notification.on("click",()=>{
+            stopAlarm() ; 
+            notifications.delete(message)
+            //removing from map once the alarm has stopped
+         })
+         notification.on("close",()=>{
+             stopAlarm();
+             notifications.delete(message)
+            })
+         notification.addListener("action",()=>{
+            stopAlarm(); 
+            notifications.delete(message)
+         })
+         notification.show()
+         
+      } catch (error) {
+        console.log(error)
+      }
 }
 
  function notificationIPC(){

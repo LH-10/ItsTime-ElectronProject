@@ -23,7 +23,7 @@ function getWavDuration(filePath:fs.PathOrFileDescriptor) {
   return duration;
 }
 
-let alarmInterval:any;
+
 function playAlarm(audioPath:string) {
   player.play({
     path: audioPath, 
@@ -33,15 +33,15 @@ function playAlarm(audioPath:string) {
     console.error('Error:', error);
   });
 }
-function stopAlarm() {
+function stopAlarm(alarmInterval:any) {
   clearInterval(alarmInterval); // Stop the loop
 }
 
 // Start the alarm
 const playForInterval=()=>{
-    playAlarm(alarmAudioFP)
     const duration=1000*getWavDuration(alarmAudioFP)
-    alarmInterval=setInterval(()=>{playAlarm(alarmAudioFP)},duration+300);
-    setTimeout(stopAlarm, 4*60*1000); 
+    const alarmInterval=setInterval(()=>{playAlarm(alarmAudioFP)},duration+300);
+    setTimeout(()=>{stopAlarm(alarmInterval)}, 4*60*1000); 
+    return ()=>{stopAlarm(alarmInterval)};
 }
-export {playForInterval,stopAlarm}
+export {playForInterval}
