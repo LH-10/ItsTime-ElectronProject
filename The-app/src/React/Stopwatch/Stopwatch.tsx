@@ -1,27 +1,45 @@
 import { FlagTriangleRightIcon, Play, Pause, RotateCcw } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+//@ts-expect-error importing worker using worker-loader ts doesnt understand
+import StopwatchWorkerConstructor from "./stopwatch.worker";
+
+let stopwatchWorker:Worker=null
 
 const Stopwatch = () => {
   const [time, setTime] = useState(0); // Time in milliseconds
   const [isRunning, setIsRunning] = useState(false);
   const [laps, setLaps] = useState<number[]>([]);
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  // const intervalRef = useRef<NodeJS.Timeout | null>(null);
   useEffect(() => {
     if (isRunning) {
-      intervalRef.current = setInterval(() => {
-        setTime((prevTime) => prevTime + 10);
-      }, 10);
+      if(!stopwatchWorker)
+      stopwatchWorker=new StopwatchWorkerConstructor()
+      
+      // intervalRef.current = setInterval(() => {
+      //   setTime((prevTime) => prevTime + 10);
+      // }, 10);
+      
     } else {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
+      // if (intervalRef.current) {
+      //   clearInterval(intervalRef.current);
+         
+      // }
+      if(stopwatchWorker){
+        stopwatchWorker.postMessage({command:"stop",value:time})
       }
+      return
     }
+    stopwatchWorker.onmessage=(e:MessageEvent)=>{
+      console.log(e)
+      setTime(e.data)
+    }
+    stopwatchWorker.postMessage({command:'start',value:time})
 
-    return () => {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
-      }
-    };
+    // return () => {
+    //   if (intervalRef.current) {
+    //     clearInterval(intervalRef.current);
+    //   }
+    // };
   }, [isRunning]);
 
   const formatTime = (milliseconds: number) => {
@@ -50,7 +68,13 @@ const Stopwatch = () => {
   };
 
   const handleReset = () => {
+    if(stopwatchWorker){
+      stopwatchWorker.terminate()
+      stopwatchWorker=null
+    }
+
     setIsRunning(false);
+    
     setTime(0);
     setLaps([]);
   };
