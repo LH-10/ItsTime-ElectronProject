@@ -44,15 +44,12 @@ const TimerCard = ({time,message='Its Time',title,other}:TimerCardProps) => {
       timerWorkerRef.current=new NewWorker()
     }
     else {
-      console.log("here, ",timeWorker)
       if (timerWorkerRef.current){
         timerWorkerRef.current.postMessage({command:"stop",value:timeLeft})
       }
       return
     }
-    console.log("here2 tm ",timeWorker)
     timerWorkerRef.current.onmessage=(e:MessageEvent)=>{
-      console.log(e)
       setTimeLeft(parseInt(e.data))
     }
     timerWorkerRef.current.postMessage({command:"start",value:timeLeft})

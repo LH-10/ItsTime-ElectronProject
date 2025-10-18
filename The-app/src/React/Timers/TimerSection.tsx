@@ -34,8 +34,10 @@ const TimerSection = () => {
 
     const editTimer:UpdateTimer=async (id,title,message,time)=>{
         try {
-            const seconds=time.hours*360+time.minutes*60+time.seconds
+            const seconds=time.hours*3600+time.minutes*60+time.seconds
+            console.log(seconds,time.hours)
             const updatedTimer:TimerData=await window.timeApi.timer.editTimer(id,title,message,seconds)
+            console.log(updatedTimer)
             setTimers((timers)=>timers.map(timer=>timer.id==id?updatedTimer:timer))
         } catch (error)  {
             console.log(error)
