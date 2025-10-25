@@ -6,9 +6,9 @@ self.addEventListener('message',(e)=>{
             milliseconds=parseInt(e.data.value)
             console.log(milliseconds)
             stopWatchInterval=setInterval(()=>{
-                self.postMessage(milliseconds+10);
-                milliseconds=milliseconds+10;
-            },10)
+                self.postMessage(milliseconds+105);
+                milliseconds=milliseconds+105;
+            },105)
             break;
         case 'stop':
             clearInterval(stopWatchInterval)
