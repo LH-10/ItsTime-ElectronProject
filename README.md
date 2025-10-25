@@ -24,7 +24,7 @@ A clean, minimal desktop **Timer & Stopwatch** app (inspired by Microsoft Clock)
 ## Screenshots
 
 <p align="center">
-  
+
 <img src="screenshots/TimerScreenshot.png" alt="Timer Preview" width="550" />
 <br/>
 <br/>
@@ -41,6 +41,7 @@ A clean, minimal desktop **Timer & Stopwatch** app (inspired by Microsoft Clock)
 * Create / edit / delete timers
 * Timers can include an optional message that will be spoken via TTS (`say`) when the timer finishes
 * Default ringtone plays when a timer finishes
+* Multithreading with Web Worker API to manage timers and stopwatch
 * Stopwatch with Start / Pause / Reset and Lap marking
 * Local persistence using SQLite (`better-sqlite3`)
 * Secure IPC via a `preload` bridge (`contextBridge.exposeInMainWorld`)
@@ -164,7 +165,7 @@ The-app/
 │  ├─ index.ts           # Electron main (ESM)
 │  ├─ preload.ts
 │  ├─ renderer.ts
-│  
+│
 ├─ .eslintrc.json
 ├─ forge.config.ts
 ├─ package.json
@@ -190,16 +191,6 @@ The-app/
 * Add tests and CI
 * Accessibility and keyboard shortcuts
 
----
-
-## Contributing
-
-1. Fork the repo
-2. Create a branch: `git checkout -b feat/some-feature`
-3. Make changes & test locally
-4. Open a PR with a clear description
-
-Please open issues for bugs or feature requests.
 
 ---
 
@@ -208,5 +199,3 @@ Please open issues for bugs or feature requests.
 This project is licensed under the MIT License.
 
 ---
-
-
