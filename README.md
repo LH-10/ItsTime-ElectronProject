@@ -1,6 +1,6 @@
 # ItsTime
 
-A clean, minimal desktop **Timer & Stopwatch** app (inspired by Microsoft Clock). Built with **Electron Forge (webpack)** and **React + Tailwind**. Timers persist locally in SQLite and the app can speak a message when a timer finishes.
+A clean, minimal desktop **Timer & Stopwatch** app (inspired by Microsoft Clock). Built with **Electron Forge (webpack)** and **React + Tailwind**. Timers persist locally in SQLite and the app can speak a message when a timer finishes.  [ Download ](#release)
 
 ---
 
@@ -15,8 +15,8 @@ A clean, minimal desktop **Timer & Stopwatch** app (inspired by Microsoft Clock)
 * [SQLite schema](#sqlite-schema)
 * [Project structure (high-level)](#project-structure-high-level)
 * [How it works (high-level)](#how-it-works-high-level)
-* [Roadmap / TODO](#roadmap--todo)
-* [Contributing](#contributing)
+* [Roadmap / TODO](#roadmap--todofeatures-i-have-to-add)
+* [Release](#release)
 * [License](#license)
 
 ---
@@ -191,6 +191,13 @@ The-app/
 * Add tests and CI
 * Accessibility and keyboard shortcuts
 
+---
+
+## Release
+ **Download the App Installer**
+
+You can download the app installer from this link:
+[Installer Link](https://www.dropbox.com/scl/fo/1xivcnjs2hthqoxzkb4cj/AHclfj1Fazitk_-QtR1BMyw?rlkey=umfpeisswopzv1c89aj0ykqd8&st=017q3cnq&dl=0)
 
 ---
 
