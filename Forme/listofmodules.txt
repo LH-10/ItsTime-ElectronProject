@@ -2,5 +2,10 @@
         1.Timer
         2.Stopwatch
         3.Reminder
+
+30/10/2025:-
+-Time Mapper with Local Time and International time to remind something (required internet)
+-Schedule task with custom script feature
+
         
 
