@@ -1,0 +1,34 @@
+FROM debian:stable
+
+WORKDIR /app
+
+# Install Dependencies
+RUN   apt-get update &&  apt install fakeroot dpkg
+RUN   apt install curl -y
+RUN   curl -fsSL https://deb.nodesource.com/setup_20.2 |  bash -
+
+# Install Node.js
+RUN   apt install nodejs npm -y
+RUN   node -v
+RUN   npm -v
+
+
+COPY package.json ./
+
+# Copy src and configs
+COPY . .
+
+
+# Install node modules
+RUN npm install
+
+
+RUN ls -a
+
+RUN npm -v
+
+#Create Debian Build
+RUN npm run make
+
+#Copy Debian Build into system when run
+CMD ["cp","-r","/app/out","/app/linuxbuild"]
