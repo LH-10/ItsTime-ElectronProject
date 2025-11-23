@@ -197,7 +197,7 @@ The-app/
  **Download the App Installer**
 
 You can download the app installer from this link:
-[Installer Link](https://www.dropbox.com/scl/fo/1xivcnjs2hthqoxzkb4cj/AHclfj1Fazitk_-QtR1BMyw?rlkey=umfpeisswopzv1c89aj0ykqd8&st=017q3cnq&dl=0)
+[Installer Link](https://www.dropbox.com/scl/fo/t2vmbyxq2anpqm6lpqnsx/AFFe62rtccCGo9hAMwGjUmc?rlkey=nk3z9fo0md8jwi292yjhmzex1&st=87knjdz5&dl=0)
 
 ---
 
