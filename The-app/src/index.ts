@@ -1,10 +1,10 @@
 import { app, BrowserWindow ,Notification,Tray,Menu, App} from 'electron';
-import path from 'path';
+import path from "path";
 import { pollResource } from './resourceManager';
 import { db, initDb } from './database/sqldb';
 import { timeDataIPC } from './ipc/timers/timersDataIpc';
 import { handleIpcRegistration } from './ipc/ipc_register';
-const Database = require('better-sqlite3');
+
 
 let mainWindow:BrowserWindow=null
 app.setAppUserModelId('Its Time');
@@ -102,6 +102,19 @@ const createWindow = (): void => {
         seconds INTEGER
         )
         `);
+      const defaultTimerQuery="INSERT into timers (title,message,seconds) VALUES(?,?,?)"
+      const timerCheck=db.prepare('Select * from timers LIMIT 1')
+      const row=timerCheck.get()
+      if(row==undefined){
+        const insertDefaultTimer=db.prepare(defaultTimerQuery)
+        const result=insertDefaultTimer.run("Timer","It's Time ", 300);
+        if(result.changes>0){
+          console.log("default timer added")
+        }
+        else{
+          console.log("Could'nt add timer")
+        }
+      }
       }
       catch(err){
         console.log(err)
