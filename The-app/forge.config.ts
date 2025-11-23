@@ -13,6 +13,7 @@ import { rendererConfig } from './webpack.renderer.config';
 
 const config: ForgeConfig = {
   packagerConfig: {
+    executableName:"its-time",	  
     asar: true,
     icon: './src/app-assets/appicon',
     extraResource: [
@@ -21,7 +22,9 @@ const config: ForgeConfig = {
     ]
   },
   rebuildConfig: {},
-  makers: [new MakerSquirrel({}), new MakerZIP({}, ['darwin']), new MakerRpm({}), new MakerDeb({})],
+  makers: [new MakerSquirrel({}), new MakerZIP({}, ['darwin']), new MakerDeb({options: {
+          depends: ["festival"]
+        }})],
   plugins: [
     new AutoUnpackNativesPlugin({}),
     new WebpackPlugin({
