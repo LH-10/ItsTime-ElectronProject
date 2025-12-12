@@ -91,9 +91,9 @@ const createWindow = (): void => {
   hideAppToTray(mainWindow)
   mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
   console.log("Hello")
-  initDb();
   
   try{
+    initDb();
     db.exec(`
       CREATE TABLE IF NOT EXISTS timers (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -119,8 +119,12 @@ const createWindow = (): void => {
       catch(err){
         console.log(err)
       }
-      
-      handleIpcRegistration();
+      try{
+        handleIpcRegistration();
+      }
+      catch(err){
+        console.log(err)
+      }
       
     };
     
