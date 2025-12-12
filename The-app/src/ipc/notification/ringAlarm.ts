@@ -1,5 +1,5 @@
-import fs from "fs"
-import path from "path";
+import fs from "node:fs"
+import path from "node:path";
 import player from "node-wav-player";
 
 const isDev=process.env.NODE_ENV!=='production'

@@ -1,5 +1,5 @@
 import { app, BrowserWindow ,Notification,Tray,Menu, App} from 'electron';
-import path from "path";
+import path from "node:path";
 import { pollResource } from './resourceManager';
 import { db, initDb } from './database/sqldb';
 import { timeDataIPC } from './ipc/timers/timersDataIpc';
