@@ -17,12 +17,15 @@ const AppRoute = () => {
   const [navItems, setNavItems] = useState([
     { icon: HourglassIcon, label: "Timer", id: "timer" },
     { icon: Clock2Icon, label: "Stopwatch", id: "stopwatch" },
-    { icon: Settings, label: "Settings", id: "settings" },
     { icon: AlarmClockIcon, label: "Alarm", id: "alarm" },
   ]);
 
+  // { icon: Settings, label: "Settings", id: "settings" },
+  useEffect(()=>{
+    console.log(activeItem)
+  },[activeItem])
   return (
-    <div className="w-full h-screen flex flex-row sm:gap-5">
+    <div className="w-full h-screen flex flex-row  sm:gap-5">
       {/* SideBar */}
       <div className="h-full px-1 md:px-0 w-10 md:w-56 bg-gray-100 border-r border-gray-200 flex flex-col transition-all duration-300">
         {/* Logo/ */}
@@ -32,8 +35,8 @@ const AppRoute = () => {
         </div>
 
         {/* Navigation Menu (Options) */}
-        <nav className="flex-1 py-2 md:p-4">
-          <div className="space-y-1">
+        <nav className="flex flex-1 flex-col py-2 h-screen  md:p-4">
+          <div className="space-y-1 ">
             {navItems.map((item) => (
               <SidebarItem
                 key={item.id}
@@ -43,7 +46,15 @@ const AppRoute = () => {
                 onClick={() => setActiveItem(item.id)}
               />
             ))}
-          </div>
+            </div>
+            <div className="     gap-y-2 mt-auto ">
+              <SidebarItem
+                icon={Settings}
+                label={"Settings"}
+                active={activeItem === "settings"}
+                onClick={() => setActiveItem("settings")}
+              />
+            </div>
         </nav>
       </div>
       <div className=" flex-1 pt-2 overflow-y-auto  content-center">
@@ -153,7 +164,7 @@ function SidebarItem({ icon: Icon, label, active = false, onClick }: SidebarItem
   return (
     <button
       onClick={onClick}
-      className={`w-full flex items-center gap-3 px-2 md:px-2 py-2 rounded-lg text-left transition-colors ${
+      className={`w-full flex items-center gap-3 px-2 md:px-3 py-2 rounded-lg text-left transition-colors ${
         active
           ? "bg-gray-300 text-black"
           : "text-gray-700 hover:bg-gray-200 hover:text-black"

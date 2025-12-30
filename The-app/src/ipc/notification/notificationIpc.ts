@@ -8,7 +8,7 @@ async function handleNotification(event:IpcMainEvent,id:number|BigInt,message:st
       console.log(id)
       console.log(message)
        const notification=new Notification({
-          title:"Its  Notification",
+          title:"Its Time",
           body:message,
           actions:[{type:'button',text:"Dismiss"}],
           silent:false,
