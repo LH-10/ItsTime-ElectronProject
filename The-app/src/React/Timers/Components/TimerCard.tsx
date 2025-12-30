@@ -129,7 +129,7 @@ useEffect(() => {
 
 
   return (
-    <div className=" group/parent1  bg-white shadow-lg rounded-xl px-6 py-3 w-64 text-center relative">
+    <div className=" group/parent1  bg-white shadow-lg rounded-xl px-6 py-3 w-[276px] text-center relative">
       {/*  Icons */}
       <div className="flex justify-between mb-4">
         <button title="Delete" onClick={()=>other.deleteTimer(other.id)} className="p-2 rounded bg-gray-50 hover:bg-gray-300">
@@ -144,9 +144,7 @@ useEffect(() => {
 
 
       
-      <div className="p-2 m-2 duration-500 origin-bottom-right justify-center flex   ">
-        <h2 title={title} className="font-semibold opacity-0 truncate text-xl group-hover/parent1:opacity-100" >{title}</h2>
-      </div>
+      
       {/* Circle */}
       <div className="flex items-center justify-center mb-6">
         <div className="relative w-44 h-44 rounded-full bg-gray-200 flex items-center shadow-md justify-center">
